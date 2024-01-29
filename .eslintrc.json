@@ -1,5 +1,5 @@
 {
-  "extends": "next/core-web-vitals",
+  "extends": ["next/core-web-vitals", "@dcl/eslint-config/sdk"],
   "parserOptions": {
     "project": [
       "tsconfig.json"
