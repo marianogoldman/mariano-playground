@@ -554,7 +554,7 @@ export default function Compare() {
 
       <div className="text-sm m-4">
         {entities.map((entityData) => (
-          <div key={entityData.id} className="mt-6 grid gap-x-2 grid-cols-4 text-gray-500">
+          <div key={entityData.id} className="mt-6 grid gap-x-2 grid-cols-4 text-gray-500 border-2 p-2">
             <div className="col-span-4 text-xs text-center">
               {entityData.id} -{' '}
               <a
@@ -565,36 +565,30 @@ export default function Compare() {
                 {entityData.address}
               </a>
             </div>
+
             <div className="col-span-1 text-xs text-center">Body (Catalyst)</div>
             <div className="col-span-1 text-xs text-center">Body (CDN)</div>
             <div className="col-span-1 text-xs text-center">Face (Catalyst)</div>
             <div className="col-span-1 text-xs text-center">Face (CDN)</div>
-            <div className="col-span-1">
+
+            <div className="col-span-1 text-center">
               <div className="overflow-hidden rounded-lg h-full w-full">
                 <img className="object-cover" src={`${catalystBaseUrl}/content/contents/${entityData.body}`} alt="" />
               </div>
             </div>
-            <div className="col-span-1 align-middle">
+            <div className="col-span-1 text-center">
               <div className="overflow-hidden rounded-lg h-full w-full">
-                <img
-                  className="object-cover"
-                  src={`${cdnBaseUrl}/${entityData.id}/body.png`}
-                  alt={'cdn_body_' + entityData.id}
-                />
+                <img className="object-cover" src={`${cdnBaseUrl}/${entityData.id}/body.png`} alt="" />
               </div>
             </div>
-            <div className="col-span-1">
+            <div className="col-span-1 text-center">
               <div className="overflow-hidden rounded-lg h-full w-full">
                 <img className="object-cover" src={`${catalystBaseUrl}/content/contents/${entityData.face}`} alt="" />
               </div>
             </div>
-            <div className="col-span-1">
+            <div className="col-span-1 text-center">
               <div className="overflow-hidden rounded-lg h-full w-full">
-                <img
-                  className="object-cover"
-                  src={`${cdnBaseUrl}/${entityData.id}/face.png`}
-                  alt={'cdn_face_' + entityData.id}
-                />
+                <img className="object-cover" src={`${cdnBaseUrl}/${entityData.id}/face.png`} alt="" />
               </div>
             </div>
           </div>
