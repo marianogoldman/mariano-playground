@@ -480,13 +480,16 @@ type EntityData = {
   face: string | undefined
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function printEntityId(entityId: string): string {
   return entityId.slice(0, 10) + '...' + entityId.slice(-10)
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function printAddress(address: string): string {
   return address.slice(0, 7) + '...' + address.slice(-5)
 }
+
 function uniqBy<T>(a: T[], key: (item: any) => string) {
   const seen: Record<string, boolean> = {}
   return a.filter(function (item) {
@@ -551,24 +554,28 @@ export default function Compare() {
 
       <div className="text-sm m-4">
         {entities.map((entityData) => (
-          <div key={entityData.id} className="mt-6 grid gap-2 grid-cols-4 text-gray-500">
-            <div className="col-span-4 text-center">
-              {printEntityId(entityData.id)} -{' '}
+          <div key={entityData.id} className="mt-6 grid gap-x-2 grid-cols-4 text-gray-500">
+            <div className="col-span-4 text-xs text-center">
+              {entityData.id} -{' '}
               <a
                 href={`https://decentraland.org/profile/accounts/${entityData.address}`}
                 target="_blank"
                 className="text-indigo-600"
               >
-                {printAddress(entityData.address)}
+                {entityData.address}
               </a>
             </div>
+            <div className="col-span-1 text-xs text-center">Body (Catalyst)</div>
+            <div className="col-span-1 text-xs text-center">Body (CDN)</div>
+            <div className="col-span-1 text-xs text-center">Face (Catalyst)</div>
+            <div className="col-span-1 text-xs text-center">Face (CDN)</div>
             <div className="col-span-1">
-              <div className="overflow-hidden rounded-lg bg-gray-100 h-96 w-48">
+              <div className="overflow-hidden rounded-lg h-full w-full">
                 <img className="object-cover" src={`${catalystBaseUrl}/content/contents/${entityData.body}`} alt="" />
               </div>
             </div>
-            <div className="col-span-1">
-              <div className="overflow-hidden rounded-lg bg-gray-100 h-96 w-48">
+            <div className="col-span-1 align-middle">
+              <div className="overflow-hidden rounded-lg h-full w-full">
                 <img
                   className="object-cover"
                   src={`${cdnBaseUrl}/${entityData.id}/body.png`}
@@ -577,12 +584,12 @@ export default function Compare() {
               </div>
             </div>
             <div className="col-span-1">
-              <div className="overflow-hidden rounded-lg bg-gray-100 h-48 w-48">
+              <div className="overflow-hidden rounded-lg h-full w-full">
                 <img className="object-cover" src={`${catalystBaseUrl}/content/contents/${entityData.face}`} alt="" />
               </div>
             </div>
             <div className="col-span-1">
-              <div className="overflow-hidden rounded-lg bg-gray-100 h-48 w-48">
+              <div className="overflow-hidden rounded-lg h-full w-full">
                 <img
                   className="object-cover"
                   src={`${cdnBaseUrl}/${entityData.id}/face.png`}
