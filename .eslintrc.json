@@ -13,5 +13,13 @@
       "trailingComma": "none",
       "tabWidth": 2
     }]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.tsx"],
+      "rules": {
+        "@next/next/no-img-element": "off"
+      }
+    }
+  ]
 }

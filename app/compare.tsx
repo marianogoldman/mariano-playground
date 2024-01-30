@@ -534,7 +534,7 @@ export default function Compare() {
     fetchProfiles(initialEntities.slice(count - 10, count))
       .then((data) => setEntities((entities) => uniqBy([...entities, ...data], (a: EntityData) => a.id)))
       .catch(console.error)
-  }, [count])
+  }, [initialEntities, count])
 
   return (
     <div className="bg-white">
@@ -550,7 +550,7 @@ export default function Compare() {
       </button>
 
       <div className="text-sm m-4">
-        {entities.map((entityData, idx) => (
+        {entities.map((entityData) => (
           <div key={entityData.id} className="mt-6 grid gap-2 grid-cols-4 text-gray-500">
             <div className="col-span-4 text-center">
               {printEntityId(entityData.id)} -{' '}

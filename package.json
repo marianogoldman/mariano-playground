@@ -10,23 +10,23 @@
   },
   "dependencies": {
     "@dcl/crypto": "^3.4.5",
-    "@dcl/schemas": "^9.9.0",
+    "@dcl/schemas": "^9.12.0",
     "@microsoft/fetch-event-source": "^2.0.1",
-    "decentraland-connect": "^5.2.1",
+    "decentraland-connect": "^6.0.0",
     "decentraland-crypto-fetch": "^2.0.1",
-    "next": "14.0.3",
+    "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
-    "@dcl/eslint-config": "^1.1.13",
+    "@dcl/eslint-config": "^2.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
-    "eslint-config-next": "14.0.3",
+    "autoprefixer": "^10.4.17",
+    "eslint-config-next": "14.1.0",
     "postcss": "^8",
-    "tailwindcss": "^3.3.0",
+    "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
 }
