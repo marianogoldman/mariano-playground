@@ -45,7 +45,6 @@ export default function Compare() {
   const [entities, setEntities] = useState<EntityData[]>([])
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false)
   const [slideOverOpen, setSlideOver] = useState<EntityData | null>(null)
-  const [selectedEntity, setSelectedEntity] = useState<EntityData | null>(null)
 
   function loadProfiles(entityIds: string[] = []) {
     fetch(
