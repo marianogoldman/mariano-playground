@@ -216,7 +216,9 @@ export default function Compare() {
                         </div>
                         <ol className="grid grid-cols-1 gap-1">
                           {slideOverOpen?.raw.metadata.avatars[0].avatar.wearables.map((wearable: string) => (
-                            <li className="p-1 bg-white text-sm border">{wearable}</li>
+                            <li key={wearable} className="p-1 bg-white text-sm border">
+                              {wearable}
+                            </li>
                           ))}
                         </ol>
                       </div>
