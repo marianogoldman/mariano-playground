@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
+import { Dialog, Transition } from '@headlessui/react'
 
 const problematicEntityIds: string[] = [
   'bafkreiarkmiqdnx7sydzf27gprlt6cxxpwy2373c4rklwe4nlrzlmbgs7a',
@@ -41,7 +42,7 @@ function uniqBy<T>(a: T[], key: (item: any) => string) {
 export default function Compare() {
   const [editingEntities, setEditingEntities] = useState<string[]>([])
   const [entities, setEntities] = useState<EntityData[]>([])
-  const [openBox, setOpenBox] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   function loadProfiles(entityIds: string[] = []) {
     fetch(
@@ -97,36 +98,70 @@ export default function Compare() {
             className="h-8 rounded bg-indigo-600 px-2 py-1 font-mono text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             onClick={() => {
               setEditingEntities(entities.map((e) => e.id))
-              setOpenBox(!openBox)
+              setIsOpen(!isOpen)
             }}
           >
             Specific profiles
           </button>
         </div>
       </div>
-      {openBox && (
-        <div className="grid grid-cols-1">
-          <textarea
-            rows={10}
-            name="comment"
-            id="comment"
-            className="block w-full font-mono rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            defaultValue={entities.map((e) => e.id).join('\n')}
-            onChange={(e) => setEditingEntities(e.target.value.split('\n'))}
-          />
-          <div className="text-center m-2">
-            <button
-              className="h-8 rounded bg-indigo-600 px-2 py-1 font-mono text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={() => {
-                loadProfiles(editingEntities)
-                setOpenBox(false)
-              }}
-            >
-              Load set
-            </button>
+      <Transition.Root show={isOpen} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={setIsOpen}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              >
+                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:p-6">
+                  <div>
+                    <div className="mx-auto flex items-center justify-center">One entity id per line</div>
+                    <div className="grid grid-cols-1">
+                      <textarea
+                        rows={10}
+                        name="comment"
+                        id="comment"
+                        className="block w-full font-mono rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        defaultValue={entities.map((e) => e.id).join('\n')}
+                        onChange={(e) => setEditingEntities(e.target.value.split('\n'))}
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-5 sm:mt-6">
+                    <button
+                      type="button"
+                      className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      onClick={() => {
+                        loadProfiles(editingEntities)
+                        setIsOpen(false)
+                      }}
+                    >
+                      Load set
+                    </button>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
           </div>
-        </div>
-      )}
+        </Dialog>
+      </Transition.Root>
 
       <div className="text-sm m-4">
         {entities.map((entityData) => (
