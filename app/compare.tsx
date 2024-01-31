@@ -235,15 +235,13 @@ export default function Compare() {
         {entities.map((entityData) => (
           <div key={entityData.id} className="mt-6 grid gap-x-2 grid-cols-4 text-gray-500 border-2 p-2">
             <div className="col-span-4 text-xs text-center">
-              <div>
-                <span
-                  className="text-indigo-600 hover:text-indigo-800 hover:cursor-pointer"
-                  onClick={() => setSlideOver(entityData)}
-                >
-                  {' '}
-                  {entityData.id}
-                </span>
-              </div>{' '}
+              <span
+                className="text-indigo-600 hover:text-indigo-800 hover:cursor-pointer"
+                onClick={() => setSlideOver(entityData)}
+              >
+                {' '}
+                {entityData.id}
+              </span>{' '}
               -{' '}
               <a
                 href={`https://decentraland.org/profile/accounts/${entityData.address}`}
