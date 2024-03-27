@@ -221,6 +221,26 @@ export default function Compare() {
                             </li>
                           ))}
                         </ol>
+
+                        <h1 className="text-base font-semibold leading-6 text-gray-900 mt-10 mb-2">forceRender</h1>
+
+                        {slideOverOpen?.raw.metadata.avatars[0].avatar.forceRender?.length > 0 ? (
+                          <ol className="grid grid-cols-1 gap-1">
+                            {slideOverOpen?.raw.metadata.avatars[0].avatar.forceRender.map((wearable: string) => (
+                              <li key={wearable} className="p-1 bg-white text-sm border">
+                                {wearable}
+                              </li>
+                            ))}
+                          </ol>
+                        ) : !slideOverOpen?.raw.metadata.avatars[0].avatar.forceRender ? (
+                          <p className="text-xs">
+                            <span>(attribute is missing)</span>
+                          </p>
+                        ) : (
+                          <p className="text-xs">
+                            <span>(array is empty)</span>
+                          </p>
+                        )}
                       </div>
                     </div>
                   </Dialog.Panel>
